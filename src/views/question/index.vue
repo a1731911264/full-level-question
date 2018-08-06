@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
     <Layout>
-      <Header :style="{position: 'fixed', width: '100%'}" style="overflow: hidden">
+      <Header :style="{position: 'fixed', width: '100%'}" style="z-index: 1">
         <Menu mode="horizontal" theme="dark" active-name="1">
           <div style="line-height: 64px;float: left;margin-left: 10px">
             <strong style="font-family: PingFang SC;color: white;line-height: 64px;font-size: 24px">悟空问答</strong>
@@ -29,7 +29,7 @@
                 <a href="javascript:void(0)">
                   <Avatar style="background-color: #87d068" icon="ios-person" />
                 </a>
-                <DropdownMenu slot="list" style="z-index: 99999999999999999999999999">
+                <DropdownMenu slot="list">
                   <DropdownItem>个人中心</DropdownItem>
                   <DropdownItem>我的订单</DropdownItem>
                   <DropdownItem>修改密码</DropdownItem>
@@ -42,9 +42,9 @@
         </Menu>
       </Header>
       <Content :style="{margin: '88px 20px 0', minHeight: '500px'}">
-        <Scroll :height="scrollHeight">
+        <div>
           <div style="padding: 5px" v-for="(question, index) in questionList" :key="question.id">
-            <Card :bordered="bordered" :dis-hover="true">
+            <Card :bordered="bordered" :dis-hover="true" style="z-index: 0">
               <p slot="title">{{ index + 1 + '、' +  question.question }}</p>
               <RadioGroup v-if="!question.multi" v-model="answer[question.id]" :vertical="question.newLine">
                 <Radio :label="selectionValue(i)" v-for="(selection, i) in question.selections" :key="selection.id"> <strong>{{ selectionValue(i) + '、' }}</strong>{{ selection.text }}</Radio>
@@ -58,9 +58,9 @@
             <Button type="info" size="large" class="button-width" @click="handleSubmit()">提交</Button>
             <Button type="success" size="large" class="button-width" @click="saveAnwser()">保存</Button>
           </div>
-        </Scroll>
+        </div>
       </Content>
-      <Footer class="layout-footer-center" style="background: #dcdee2">2011-2018 &copy; 上海满吉教育投资有限公司</Footer>
+      <Footer class="layout-footer-center">2011-2018 &copy; 上海满吉教育投资有限公司</Footer>
     </Layout>
     <Modal
       :ok-text="modalText"
@@ -103,9 +103,6 @@ export default {
     this.refreshTime()
   },
   computed: {
-    scrollHeight () {
-      return screen.height - 265
-    }
   },
   methods: {
     refreshTime () {
@@ -220,8 +217,8 @@ export default {
 <style scoped>
   .layout{
     position: relative;
-    border-radius: 4px;
-    overflow-y:hidden;
+    overflow-y: hidden;
+    background: #b4dff0;
   }
   .layout-nav{
     width: 1000px;
