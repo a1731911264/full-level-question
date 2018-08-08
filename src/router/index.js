@@ -25,7 +25,7 @@ let router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  let user = window.sessionStorage.getItem('token')
+  let user = window.sessionStorage.getItem('result')
   if (to.path.startsWith('/login')) {
     if (user !== 'null' && user != null) {
       next({name: 'question'})

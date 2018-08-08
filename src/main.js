@@ -12,7 +12,7 @@ import axios from 'axios'
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(iView)
-axios.defaults.baseURL = 'http://127.0.0.1:9090'
+axios.defaults.baseURL = 'http://127.0.0.1:8888'
 Vue.prototype.$ajax = axios
 
 /* eslint-disable no-new */

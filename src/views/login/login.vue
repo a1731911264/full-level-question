@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'login',
   data () {
@@ -71,12 +72,30 @@ export default {
         if (valid) {
           this.loading = true
           this.loading2 = false
-          setTimeout(() => {
-            sessionStorage.setItem('token', this.loginForm.username + '_' + this.loginForm.password)
-            this.$router.push({
-              name: 'index'
+          axios.post('/auth/login', this.loginForm)
+            .then(response => {
+              let data = response.data
+              if (data.status === 200) {
+                this.$Notice.success({
+                  title: '温馨提示',
+                  desc: '北京今日终于转雷阵雨，出门记得带伞，不要在树下避雨。',
+                  duration: 10
+                })
+                window.sessionStorage.setItem('result', JSON.stringify(data.result))
+                this.$router.push({
+                  'name': 'question'
+                })
+              } else {
+                this.$Message.error(data.message)
+              }
+              this.loading = false
+              this.loading2 = true
             })
-          }, 1000)
+            .catch(reason => {
+              this.$Message.error('服务器繁忙！')
+              this.loading = false
+              this.loading2 = true
+            })
         }
       })
     },

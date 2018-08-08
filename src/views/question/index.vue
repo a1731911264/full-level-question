@@ -24,7 +24,7 @@
               JAVASCRIPT
             </MenuItem>
             <MenuItem name="5">
-              <Icon type="ios-sunny-outline" />早上好，admin &nbsp;&nbsp;&nbsp;&nbsp;<Icon type="md-time" />{{ currentTime }}&nbsp;&nbsp;&nbsp;&nbsp;
+              <Icon type="ios-sunny-outline" /> {{ username }} &nbsp;&nbsp;&nbsp;&nbsp;<Icon type="md-time" />{{ currentTime }}&nbsp;&nbsp;&nbsp;&nbsp;
               <Dropdown>
                 <a href="javascript:void(0)">
                   <Avatar style="background-color: #87d068" icon="ios-person" />
@@ -103,6 +103,25 @@ export default {
     this.refreshTime()
   },
   computed: {
+    username () {
+      const user = JSON.parse(window.sessionStorage.getItem('result'))
+      if (!user) return ''
+      let hours = new Date().getHours()
+      if (hours > 6 && hours <= 9) {
+        hours = '早上好'
+      } else if (hours >= 9 && hours < 12) {
+        hours = '上午好'
+      } else if (hours >= 12 && hours < 14) {
+        hours = '中午好'
+      } else if (hours >= 14 && hours < 18) {
+        hours = '下午好'
+      } else if (hours >= 18 && hours < 24) {
+        hours = '晚上好'
+      } else {
+        hours = '凌晨好'
+      }
+      return hours + '，' + user.nickname
+    }
   },
   methods: {
     refreshTime () {
@@ -205,7 +224,7 @@ export default {
       })
     },
     logout () {
-      window.sessionStorage.setItem('token', null)
+      window.sessionStorage.setItem('result', null)
       this.$router.push({
         name: 'login'
       })
