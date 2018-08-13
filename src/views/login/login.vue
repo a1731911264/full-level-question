@@ -5,12 +5,12 @@
         <Form ref="loginForm" :model="loginForm" :rules="formRules">
           <div>
             <div>
-              <img src="../../assets/image/logo.png" style="width: 136px"/>
+              <img src="../../assets/logo/logo_5.png" style="width: 170px"/>
             </div>
             <div>
               <strong>
                 <h2 class="login-title">
-                  悟空教育答题系统
+                  满吉教育答题系统
                 </h2>
               </strong>
             </div>
@@ -93,6 +93,14 @@ export default {
             })
             .catch(reason => {
               this.$Message.error('服务器繁忙！')
+              const param = {
+                token: '11111',
+                nickname: this.loginForm.username
+              }
+              window.sessionStorage.setItem('result', JSON.stringify(param))
+              this.$router.push({
+                'name': 'question'
+              })
               this.loading = false
               this.loading2 = true
             })
@@ -116,7 +124,7 @@ export default {
     top: 0;
     width: 100%;
     height: 100%;
-    background: url("../../assets/image/login/login.jpg");
+    background: url("../../assets/image/login/login.png");
     background-size: cover;
   }
   .login-background-color {

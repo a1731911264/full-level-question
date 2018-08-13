@@ -1,10 +1,22 @@
 <template>
   <div class="layout">
     <Layout>
-      <Header :style="{position: 'fixed', width: '100%'}" style="z-index: 1">
-        <Menu mode="horizontal" theme="dark" active-name="1">
-          <div style="line-height: 64px;float: left;margin-left: 10px">
-            <strong style="font-family: PingFang SC;color: white;line-height: 64px;font-size: 24px">悟空问答</strong>
+      <div class="header">
+        <Menu mode="horizontal" theme="light" style="height: 64px;line-height: 64px;">
+          <div>
+            <div class="layout-logo">
+              <a href="javascript:void(0)" v-on:click="master()">
+                <img src="../../assets/logo/logo_5.png" height="64px"/>
+              </a>
+            </div>
+            <div style="line-height: 64px;float: left;margin-left: 0px">
+              <div style="font-family: PingFang SC;line-height: 64px;font-size: 20px">
+                满吉教育面试问答系统
+              </div>
+            </div>
+            <div style="height: 64px;line-height: 64px;float: left;margin-left: 20px">
+              <Input suffix="ios-search" size="small" placeholder="输入关键字......" style="width: 200px;border: 0px" />
+            </div>
           </div>
           <div class="layout-nav">
             <MenuItem name="1">
@@ -13,18 +25,29 @@
             </MenuItem>
             <MenuItem name="2">
               <Icon type="ios-keypad"></Icon>
-              PHP
+              HTML
             </MenuItem>
             <MenuItem name="3">
               <Icon type="ios-analytics"></Icon>
-              HTML5
-            </MenuItem>
-            <MenuItem name="4">
-              <Icon type="ios-paper"></Icon>
               JAVASCRIPT
             </MenuItem>
-            <MenuItem name="5">
-              <Icon type="ios-sunny-outline" /> {{ username }} &nbsp;&nbsp;&nbsp;&nbsp;<Icon type="md-time" />{{ currentTime }}&nbsp;&nbsp;&nbsp;&nbsp;
+            <MenuItem name="4">
+              <Icon type="ios-analytics"></Icon>
+              PHP
+            </MenuItem>
+            <Submenu name="5">
+              <template slot="title">
+                <Icon type="ios-stats" />
+                其他语言
+              </template>
+              <MenuGroup title="语言名称" >
+                <MenuItem name="5-1">PYTHON</MenuItem>
+                <MenuItem name="5-2">C++</MenuItem>
+                <MenuItem name="5-3">C#</MenuItem>
+              </MenuGroup>
+            </Submenu>
+            <div>
+              <Icon type="ios-sunny-outline" /> {{ username }} &nbsp;&nbsp;
               <Dropdown>
                 <a href="javascript:void(0)">
                   <Avatar style="background-color: #87d068" icon="ios-person" />
@@ -37,10 +60,10 @@
                   <DropdownItem divided v-on:click.native="logout()">退出登录</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
-            </MenuItem>
+            </div>
           </div>
         </Menu>
-      </Header>
+      </div>
       <Content :style="{margin: '88px 20px 0', minHeight: '500px'}">
         <div>
           <div style="padding: 5px" v-for="(question, index) in questionList" :key="question.id">
@@ -239,10 +262,9 @@ export default {
     overflow-y: hidden;
     background: #b4dff0;
   }
-  .layout-nav{
-    width: 1000px;
-    margin: 0 auto;
-    margin-right: -220px;
+  .layout-logo{
+    float: left;
+    position: relative;
   }
   .layout-footer-center{
     text-align: center;
@@ -252,5 +274,16 @@ export default {
   }
   .checkboxInlineBlock {
     display: inline-block;
+  }
+  .header {
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+    height: 82px;
+  }
+  .layout-nav{
+    width: 800px;
+    margin: auto;
+    margin-right: 0px;
   }
 </style>
