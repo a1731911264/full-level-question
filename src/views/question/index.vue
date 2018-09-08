@@ -83,7 +83,7 @@
           </div>
         </div>
       </Content>
-      <Footer class="layout-footer-center">2011-2018 &copy; 上海满吉教育投资有限公司</Footer>
+      <Footer class="layout-footer-center">2011-2018 &copy; 上海满吉教育科技有限公司</Footer>
     </Layout>
     <Modal
       :ok-text="modalText"

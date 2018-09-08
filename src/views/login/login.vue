@@ -16,13 +16,13 @@
             </div>
           </div>
           <FormItem prop="username">
-            <Input v-model="loginForm.username" prefix="ios-person" placeholder="请输入用户名......"/>
+            <Input size="large" v-model="loginForm.username" prefix="ios-person" placeholder="请输入用户名......"/>
           </FormItem>
           <FormItem prop="password">
-            <Input prefix="ios-lock" type="password" v-model="loginForm.password" placeholder="请输入密码......"/>
+            <Input size="large" prefix="ios-lock" type="password" v-model="loginForm.password" placeholder="请输入密码......"/>
           </FormItem>
           <FormItem>
-            <Button type="primary" @click="login('loginForm')" @keyup.native="handlerLogin" long :loading="loading">
+            <Button size="large" type="primary" @click="login('loginForm')" @keyup.native="handlerLogin" long :loading="loading">
               <span v-show="loading2">登陆</span>
               <span v-show="loading">正在登陆</span>
             </Button>
